@@ -1,0 +1,2 @@
+#!/usr/bin/env fish
+task add $argv +shopping
