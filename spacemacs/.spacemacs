@@ -40,7 +40,11 @@ This function should only modify configuration layer settings."
      ;; ----------------------------------------------------------------
      javascript
      rust
-     html
+     (html :variables
+           css-enable-lsp t
+           less-enable-lsp t
+           scss-enable-lsp t
+           html-enable-lsp t)
      yaml
      autohotkey
      shell-scripts
