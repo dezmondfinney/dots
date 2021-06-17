@@ -37,12 +37,12 @@ function xx
     exit
 end
 
-function fish_prompt
-    set_color purple
-    set_color -b white
-    echo "$USER_NAME" (set_color -b normal)
-    set_color FFF
-    echo (prompt_pwd) (set_color normal)
-end
+# function fish_prompt
+#     set_color purple
+#     set_color -b white
+#     echo "$USER_NAME" (set_color -b normal)
+#     set_color FFF
+#     echo (prompt_pwd) (set_color normal)
+# end
 
 set fish_greeting
