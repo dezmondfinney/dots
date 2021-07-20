@@ -1,9 +1,17 @@
 set -gx ALTERNATE_EDITOR ""
-set -gx EDITOR "emacsclient -nw"
+set -gx EDITOR "nvim"
+set -gx PAGER "most"
 set -gx PATH $PATH $HOME/bin $HOME/go/bin
 set -gx GOPATH $HOME/go
 set -gx INFOPATH /data/data/com.termux/files/usr/share/info/
-set -g fish_prompt_pwd_dir_length 5
+set -g fish_prompt_pwd_dir_length 9
+set __fish_git_prompt_showdirtystate 'yes'
+set __fish_git_prompt_color_branch magenta
+set __fish_git_prompt_char_dirtystate '!'
+set __fish_git_prompt_char_stagedstate '→'
+set __fish_git_prompt_char_stashstate '↩'
+set __fish_git_prompt_char_upstream_ahead '↑'
+set __fish_git_prompt_char_upstream_behind '↓'
 
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]
     set SESSION_TYPE "remote/ssh"
@@ -37,12 +45,13 @@ function xx
     exit
 end
 
-# function fish_prompt
-#     set_color purple
-#     set_color -b white
-#     echo "$USER_NAME" (set_color -b normal)
-#     set_color FFF
-#     echo (prompt_pwd) (set_color normal)
-# end
+set __fish_prompt_showdirtystate 'yes'
+
+function fish_prompt
+    echo "$USER_NAME" (prompt_pwd)(fish_git_prompt)
+    echo "⁁ "
+end
+
+alias gs='git status'
 
 set fish_greeting
