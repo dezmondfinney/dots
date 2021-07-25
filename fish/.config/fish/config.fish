@@ -23,7 +23,7 @@ switch $USER
     case "u0_a235"
         set -gx USER_NAME "📱s10"
     case "*"
-        set -gx USER_NAME "💻 $USER"
+        set -gx USER_NAME "💻 $USER@$hostname"
 end
 
 function fish_title;end
