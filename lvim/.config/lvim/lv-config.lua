@@ -57,7 +57,6 @@ lvim.plugins = {
   {'dag/vim-fish'},
   {'ggandor/lightspeed.nvim'},
   {'tpope/vim-surround'},
-  {'tpope/vim-fugitive'},
   {'voldikss/vim-floaterm'},
   {'junegunn/goyo.vim'},
   {
