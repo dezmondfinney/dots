@@ -61,12 +61,6 @@ lvim.plugins = {
   {'voldikss/vim-floaterm'},
   {'junegunn/goyo.vim'},
   {
-    'hoob3rt/lualine.nvim',
-    config = function ()
-      require("lualine").setup()
-    end
-  },
-  {
     "folke/persistence.nvim",
     event = "VimEnter",
     module = "persistence",
