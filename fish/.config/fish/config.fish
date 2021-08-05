@@ -55,3 +55,6 @@ end
 alias gs='git status'
 
 set fish_greeting
+abbr -a -g tx task export
+abbr -a -g ar ranger
+abbr -a -g ga git add
