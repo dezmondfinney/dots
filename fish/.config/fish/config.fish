@@ -1,7 +1,7 @@
 set -gx ALTERNATE_EDITOR ""
 set -gx EDITOR lvim
 set -gx PAGER most
-set -gx PATH $PATH $HOME/bin $HOME/go/bin $HOME/.local/bin
+set -gx PATH $PATH $HOME/bin $HOME/go/bin $HOME/.local/bin /usr/local/go/bin
 set -gx GOPATH $HOME/go
 set -gx INFOPATH /data/data/com.termux/files/usr/share/info/
 set -g fish_prompt_pwd_dir_length 9
