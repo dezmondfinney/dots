@@ -80,8 +80,8 @@ lvim.plugins = {
 -- Additional Leader bindings for WhichKey
 lvim.builtin.which_key.mappings["a"] = {
   name = "+Apps",
-  r = {"<cmd> FloatermNew ranger<CR>", "Ranger"},
-  g = {"<cmd> FloatermNew lazygit<CR>", "Git"}
+  r = {"<cmd> FloatermNew --autoclose=1 ranger<CR>", "Ranger"},
+  g = {"<cmd> FloatermNew --autoclose=1 lazygit<CR>", "Git"}
 }
 
 lvim.builtin.which_key.mappings["Q"] = {
