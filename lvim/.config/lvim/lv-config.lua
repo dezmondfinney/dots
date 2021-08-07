@@ -77,6 +77,13 @@ lvim.plugins = {
 -- }
 
 -- Additional Leader bindings for WhichKey
+lvim.builtin.which_key.mappings["t"] = {
+  name = "+Toggles",
+  z = {"<cmd> Goyo<CR>", "Zen"},
+  n = {"<cmd> set nonumber<CR>", "Numbers"},
+  r = {"<cmd> set relativenumber<CR>", "Relative Numbers"}
+}
+
 lvim.builtin.which_key.mappings["a"] = {
   name = "+Apps",
   r = {"<cmd> FloatermNew ranger<CR>", "Ranger"},
