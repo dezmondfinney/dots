@@ -80,8 +80,8 @@ lvim.plugins = {
 -- Additional Leader bindings for WhichKey
 lvim.builtin.which_key.mappings["a"] = {
   name = "+Apps",
-  r = {"<cmd> FloatermNew --autoclose=1 ranger<CR>", "Ranger"},
-  g = {"<cmd> FloatermNew --autoclose=1 lazygit<CR>", "Git"}
+  r = {"<cmd> FloatermNew ranger<CR>", "Ranger"},
+  g = {"<cmd> FloatermNew lazygit<CR>", "Git"}
 }
 
 lvim.builtin.which_key.mappings["Q"] = {
@@ -94,6 +94,7 @@ lvim.builtin.which_key.mappings["Q"] = {
 
 vim.cmd([[
   let g:floaterm_keymap_toggle = "<C-space>"
+  let g:floaterm_autoclose = 1
   let g:floaterm_height = 0.85
   let g:goyo_width = "75%"
 ]])
