@@ -53,7 +53,6 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- Additional Plugins
 lvim.plugins = {
   {'lunarvim/colorschemes'},
-  {'kevinhwang91/rnvimr'},
   {'dag/vim-fish'},
   {'ggandor/lightspeed.nvim'},
   {'tpope/vim-surround'},
