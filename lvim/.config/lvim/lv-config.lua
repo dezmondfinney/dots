@@ -87,6 +87,7 @@ lvim.builtin.which_key.mappings["t"] = {
 lvim.builtin.which_key.mappings["a"] = {
   name = "+Apps",
   r = {"<cmd> FloatermNew ranger<CR>", "Ranger"},
+  t = {"<cmd> FloatermNew tasksh<CR>", "Taskwarrior"},
   g = {"<cmd> FloatermNew lazygit<CR>", "Git"}
 }
 
