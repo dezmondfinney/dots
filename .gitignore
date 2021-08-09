@@ -1,1 +1,5 @@
 **/__pycache__/
+
+fish/.config/fish/fish_history
+fish/.config/fish/fishd.*
+fish/.config/fish/fish_variables
