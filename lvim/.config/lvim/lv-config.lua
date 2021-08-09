@@ -17,6 +17,13 @@ lvim.keys.normal_mode = {
   -- Navigate buffers
   {'<Tab>', ':bnext<CR>'},
   {'<S-Tab>', ':bprevious<CR>'},
+
+  -- Navigate tmux
+  {"<A-h>", "<CMD>lua require('Navigator').left()<CR>"},
+  {"<A-k>", "<CMD>lua require('Navigator').up()<CR>"},
+  {"<A-l>", "<CMD>lua require('Navigator').right()<CR>"},
+  {"<A-j>", "<CMD>lua require('Navigator').down()<CR>"},
+  {"<A-p>", "<CMD>lua require('Navigator').previous()<CR>"},
 }
 
 -- if you just want to augment the existing ones then use the utility function
@@ -58,6 +65,7 @@ lvim.plugins = {
   {'tpope/vim-surround'},
   {'voldikss/vim-floaterm'},
   {'junegunn/goyo.vim'},
+  {'numToStr/Navigator.nvim'},
   {
     "folke/persistence.nvim",
     event = "VimEnter",
