@@ -110,6 +110,6 @@ lvim.builtin.which_key.mappings["Q"] = {
 vim.cmd([[
   let g:floaterm_keymap_toggle = "<C-space>"
   let g:floaterm_autoclose = 1
-  let g:floaterm_height = 0.7
+  let g:floaterm_height = 0.9
   let g:goyo_width = 120
 ]])
