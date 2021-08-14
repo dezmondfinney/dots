@@ -43,3 +43,4 @@ abbr -a -g ga git add
 abbr -a -g gs git status
 abbr -a -g xx exit
 abbr -a -a lg lazygit
+abbr -a -g lz lazygit
