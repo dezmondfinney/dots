@@ -30,7 +30,7 @@ set __fish_prompt_showdirtystate yes
 set fish_greeting
 
 function fish_prompt
-    echo "$USER_NAME" (prompt_pwd)(fish_git_prompt)
+    echo "$USER_NAME" (prompt_pwd) (fish_git_prompt)
     echo "⁁ "
 end
 
