@@ -30,7 +30,7 @@ set __fish_prompt_showdirtystate yes
 set fish_greeting
 
 function fish_prompt
-    echo "$USER_NAME" (prompt_pwd)(fish_git_prompt)
+    echo "$USER_NAME" (prompt_pwd) (fish_git_prompt)
     echo "⁁ "
 end
 
@@ -43,3 +43,4 @@ abbr -a -g ga git add
 abbr -a -g gs git status
 abbr -a -g xx exit
 abbr -a -a lg lazygit
+abbr -a -g lz lazygit

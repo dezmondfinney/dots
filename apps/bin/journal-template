@@ -1,0 +1,19 @@
+#! /usr/bin/fish
+
+set document ~/Sync/Documents/journal/(date +%d%m%Y).md
+
+set template (date +"%D")"
+========
+
+The Good
+----
+The Bad
+---
+The Ugly
+---"
+
+if test -e $document 
+  echo "Already exitsts"
+else
+  echo $template > $document
+end

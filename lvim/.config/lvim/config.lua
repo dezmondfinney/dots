@@ -9,22 +9,14 @@ lvim.colorscheme = "darkplus"
 lvim.leader = "space"
 
 -- overwrite the key-mappings provided by LunarVim for any mode, or leave it empty to keep them
-lvim.keys.normal_mode = {
-  -- Page down/up
-  {'[d', '<PageUp>'},
-  {']d', '<PageDown>'},
-
-  -- Navigate buffers
-  {'<Tab>', ':bnext<CR>'},
-  {'<S-Tab>', ':bprevious<CR>'},
-
-  -- Navigate tmux
-  {"<A-h>", "<CMD>lua require('Navigator').left()<CR>"},
-  {"<A-k>", "<CMD>lua require('Navigator').up()<CR>"},
-  {"<A-l>", "<CMD>lua require('Navigator').right()<CR>"},
-  {"<A-j>", "<CMD>lua require('Navigator').down()<CR>"},
-  {"<A-p>", "<CMD>lua require('Navigator').previous()<CR>"},
-}
+lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
+lvim.keys.normal_mode["<Tab>"] = ":bnext<CR>"
+lvim.keys.normal_mode["<S-Tab>"] = ":bprev<CR>"
+-- lvim.keys.normal_mode["<A-h>"] = "<CMD>lua require('Navigator').left()<CR>"
+-- lvim.keys.normal_mode["<A-k>"] = "<CMD>lua require('Navigator').up()<CR>"
+-- lvim.keys.normal_mode["<A-l>"] = "<CMD>lua require('Navigator').right()<CR>"
+-- lvim.keys.normal_mode["<A-j>"] = "<CMD>lua require('Navigator').down()<CR>"
+-- lvim.keys.normal_mode["<A-p>"] = "<CMD>lua require('Navigator').previous()<CR>"
 
 -- if you just want to augment the existing ones then use the utility function
 -- require("utils").add_keymap_insert_mode({ silent = true }, {
@@ -59,6 +51,23 @@ lvim.builtin.treesitter.highlight.enabled = true
 
 -- Additional Plugins
 lvim.plugins = {
+  {
+    'vhyrro/neorg',
+    config = function() require('neorg').setup { 
+      load = {
+        ["core.defaults"] = {},
+        ["core.norg.concealer"] = {}, 
+        ["core.norg.dirman"] = { 
+          config = {
+            workspaces = {
+              my_workspace = "~/neorg"
+            }
+          }
+        }
+      },
+    } end,
+    requires = "nvim-lua/plenary.nvim"
+  },
   {'lunarvim/colorschemes'},
   {'dag/vim-fish'},
   {'ggandor/lightspeed.nvim'},
