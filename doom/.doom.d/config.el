@@ -39,13 +39,6 @@
 (setq display-line-numbers-type nil)
 (global-set-key [(control h)] 'delete-backward-char)
 
-;;;; Mouse scrolling in terminal emacs
-(unless (display-graphic-p)
-    ;; activate mouse-based scrolling
-    (xterm-mouse-mode 1)
-    (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
-    (global-set-key (kbd "<mouse-5>") 'scroll-up-line))
-
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
