@@ -37,7 +37,14 @@
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type nil)
+
+(setq doom-modeline-unicode-fallback t)
 (global-set-key [(control h)] 'delete-backward-char)
+
+;;;; Mouse scrolling in terminal emacs
+(unless (display-graphic-p)
+  (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
+  (global-set-key (kbd "<mouse-5>") 'scroll-up-line))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
