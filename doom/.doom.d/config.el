@@ -39,13 +39,8 @@
 (setq display-line-numbers-type nil)
 
 (setq doom-modeline-unicode-fallback t)
-;; Whether display the perspective name. Non-nil to display in the mode-line.
 (setq doom-modeline-persp-name t)
-
-;; If non nil the default perspective name is displayed in the mode-line.
 (setq doom-modeline-display-default-persp-name nil)
-
-;; If non nil the perspective name is displayed alongside a folder icon.
 (setq doom-modeline-persp-icon t)
 
 (global-set-key [(control h)] 'delete-backward-char)
