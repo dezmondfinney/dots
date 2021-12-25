@@ -21,6 +21,8 @@ keymap('n', '<Leader>w', ':w<CR>', {})
 
 keymap('n', '<f12>', ':FloatermNew --autoclose=2<CR>', { noremap = true, silent = true })
 
+keymap('i', 'jk', '<esc>', { noremap = true, silent = true })
+
 vim.cmd[[colorscheme dracula]]
 
 -- keymap('n', '<Leader>z', function () 

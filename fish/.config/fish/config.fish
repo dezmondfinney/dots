@@ -18,10 +18,10 @@ if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]
 end
 
 switch $USER
-    case u0_a302
-        set -gx USER_NAME "📱Note20"
+    case u0_a403
+        set -gx USER_NAME "📱 Note20"
     case u0_a235
-        set -gx USER_NAME "📱s10"
+        set -gx USER_NAME "📱 s10"
     case "*"
         set -gx USER_NAME "💻 $USER@$hostname"
 end
