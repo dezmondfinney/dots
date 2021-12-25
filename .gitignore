@@ -1,4 +1,6 @@
 **/__pycache__/
+__pycache__/
+*.pyc
 
 fish/.config/fish/fish_history
 fish/.config/fish/fishd.*
