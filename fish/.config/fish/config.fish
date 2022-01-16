@@ -1,5 +1,5 @@
 set -gx ALTERNATE_EDITOR ""
-set -gx EDITOR lvim
+set -gx EDITOR nvim
 set -gx PAGER most
 set -gx PATH $PATH $HOME/bin $HOME/go/bin $HOME/.local/bin /usr/local/go/bin
 set -gx GOPATH $HOME/go
@@ -20,6 +20,8 @@ end
 switch $USER
     case u0_a403
         set -gx USER_NAME "📱 Note20"
+    case u0_a286
+        set -gx USER_NAME "💻 Tab s7+"
     case u0_a235
         set -gx USER_NAME "📱 s10"
     case "*"
