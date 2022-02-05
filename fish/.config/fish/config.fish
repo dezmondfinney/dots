@@ -4,7 +4,7 @@ set -gx PAGER most
 set -gx PATH $PATH $HOME/bin $HOME/go/bin $HOME/.local/bin /usr/local/go/bin
 set -gx GOPATH $HOME/go
 set -gx INFOPATH /data/data/com.termux/files/usr/share/info/
-set fish_greeting
+# set fish_greeting
 
 function fish_title
 end
