@@ -5,3 +5,8 @@ __pycache__/
 fish/.config/fish/fish_history
 fish/.config/fish/fishd.*
 fish/.config/fish/fish_variables
+fish/.config/fish/functions/
+fish/.config/fish/completions/
+fish/.config/fish/conf.d/
+
+!fish/.config/fish/functions/fisher.fish
