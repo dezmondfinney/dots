@@ -15,3 +15,5 @@ abbr -a -g ga git add
 abbr -a -g gs git status
 abbr -a -g xx exit
 abbr -a -a lg lazygit
+abbr -a -a ll exa --long --icons
+abbr -a -a la exa --long --icons --all
