@@ -1,3 +1,5 @@
 #! /usr/bin/fish
+set plugged (termux-battery-status | jq .plugged)
+set percentage (termux-battery-status | jq .percentage)
 
-echo (termux-battery-status | jq .percentage)"% "
+echo $plugged $percentage"% "
