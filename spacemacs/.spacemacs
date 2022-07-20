@@ -552,7 +552,7 @@ Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
   (setq org-journal-dir "~/Sync/org/journal/")
-
+  (setq org-journal-file-format "%Y%m%d.org")
 
   (global-set-key [(control h)] 'delete-backward-char)
   (setq-default evil-escape-key-sequence "jk")
@@ -561,7 +561,8 @@ before packages are loaded."
   ;; Does not work with mosh only when connecting over adb or ssh
   (unless (display-graphic-p)
     (require 'evil-terminal-cursor-changer)
-    (evil-terminal-cursor-changer-activate))
+    (evil-terminal-cursor-changer-activate)
+    (advice-add 'etcc--make-tmux-seq :override #'identity))
 
   ;;;; Mouse scrolling in terminal emacs
   (unless (display-graphic-p)
