@@ -7,7 +7,11 @@ set -gx LOGDATE (date +"%Y%m%dT%H%M%S")
 set fish_greeting
 
 function fish_prompt
-  echo ">"
+  echo "  "
+end
+
+function fish_right_prompt
+  echo (prompt_pwd --full-length-dirs=3)
 end
 
 abbr -a -g tx task export
