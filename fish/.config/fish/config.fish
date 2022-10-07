@@ -7,7 +7,7 @@ set -gx LOGDATE (date +"%Y%m%dT%H%M%S")
 set fish_greeting
 
 function fish_prompt
-  echo "  "
+  echo (fish_git_prompt) " "
 end
 
 function fish_right_prompt
