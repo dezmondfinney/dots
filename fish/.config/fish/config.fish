@@ -11,7 +11,7 @@ function fish_prompt
 end
 
 function fish_right_prompt
-  echo (prompt_pwd --full-length-dirs=3)
+  echo (prompt_pwd)
 end
 
 abbr -a -g tx task export
