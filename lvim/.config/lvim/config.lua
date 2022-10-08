@@ -19,6 +19,7 @@ lvim.colorscheme = "onedarker"
 lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
+lvim.keys.normal_mode["jj"] = "<esc>"
 -- unmap a default keymapping
 -- vim.keymap.del("n", "<C-Up>")
 -- override a default keymapping
@@ -145,12 +146,13 @@ lvim.builtin.treesitter.highlight.enabled = true
 
 -- Additional Plugins
 lvim.plugins = {
-{'nvim-neorg/neorg'}
---     {"folke/tokyonight.nvim"},
---     {
---       "folke/trouble.nvim",
---       cmd = "TroubleToggle",
---     },
+  {
+    'nvim-neorg/neorg',
+    config = function()
+        require('neorg').setup()
+    end,
+    requires = "nvim-lua/plenary.nvim"
+  }
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
