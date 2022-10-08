@@ -1,5 +1,5 @@
 set -gx ALTERNATE_EDITOR ""
-set -gx EDITOR nvim
+set -gx EDITOR lvim
 set -gx PATH $PATH $HOME/bin $HOME/go/bin $HOME/.local/bin /usr/local/go/bin
 set -gx GOPATH $HOME/go
 set -gx INFOPATH /data/data/com.termux/files/usr/share/info/
