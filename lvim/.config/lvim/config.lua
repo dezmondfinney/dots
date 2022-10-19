@@ -152,7 +152,9 @@ lvim.plugins = {
         require('neorg').setup()
     end,
     requires = "nvim-lua/plenary.nvim"
-  }
+  },
+  { 'Pocco81/true-zen.nvim' },
+  { 'kmonad/kmonad-vim' }
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
