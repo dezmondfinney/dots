@@ -6,14 +6,6 @@ set -gx INFOPATH /data/data/com.termux/files/usr/share/info/
 set -gx LOGDATE (date +"%Y%m%dT%H%M%S")
 set fish_greeting
 
-function fish_prompt
-  echo (fish_git_prompt) " "
-end
-
-function fish_right_prompt
-  echo (prompt_pwd)
-end
-
 abbr -a -g tx task export
 abbr -a -g ar ranger
 abbr -a -g ga git add
