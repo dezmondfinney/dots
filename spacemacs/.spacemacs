@@ -89,6 +89,7 @@ This function should only modify configuration layer settings."
                                       evil-terminal-cursor-changer
                                       lsp-tailwindcss
                                       olivetti
+                                      org-modern
                                       )
 
    ;; A list of packages that cannot be updated.
