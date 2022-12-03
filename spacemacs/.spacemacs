@@ -86,9 +86,9 @@ This function should only modify configuration layer settings."
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(
                                       evil-terminal-cursor-changer
-                                      lsp-tailwindcss
+                                      ;; lsp-tailwindcss
                                       olivetti
-                                      org-modern
+                                      svg-tag-mode
                                       )
 
    ;; A list of packages that cannot be updated.
@@ -250,7 +250,9 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(all-the-icons :separator arrow :separator-scale 1.5)
+   dotspacemacs-mode-line-theme (if (display-graphic-p)
+                                    '(all-the-icons :separator arrow :separator-scale 1.5)
+                                    '(spacemacs :separator arrow :separator-scale 1.5))
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
@@ -260,7 +262,7 @@ It should only modify the values of Spacemacs settings."
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
    dotspacemacs-default-font '("Inconsolata Nerd Font Mono"
-                               :size 14.0
+                               :size 18.0
                                :weight normal
                                :width normal)
 
@@ -551,33 +553,48 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  ;; TODO: activate olivetti in magit buffers
-  (setq global-vi-tilde-fringe-mode nil)
-  (setq vi-tilde-fringe nil)
-
-  (setq auto-mode-alist
-        (append '((".*\\.astro\\'" . js-jsx-mode))
-                auto-mode-alist))
-
-  (setq org-journal-dir "~/Sync/org/journal/")
-  (setq org-journal-file-format "%Y%m%d.org")
-  (setq org-hide-emphasis-markers t)
-
-  ;; (defface org-checkbox-done-text
-  ;;   '((t (:foreground "#71696A")))
-  ;;   "Face for the text part of a checked org-mode checkbox.")
 
   (global-set-key [(control h)] 'delete-backward-char)
   (setq-default evil-escape-key-sequence "jj")
   (setq-default evil-escape-delay 0.2)
 
-  ;; Does not work with mosh only when connecting over adb or ssh
-  (unless (display-graphic-p)
-    (require 'evil-terminal-cursor-changer)
-    (evil-terminal-cursor-changer-activate)
-    (advice-add 'etcc--make-tmux-seq :override #'identity))
+  ;; -------------------
+  ;; Mode Configurations
+  ;; -------------------
 
-  ;;;; Mouse scrolling in terminal emacs
+  ;; astro js
+  ;; ---------------
+  (setq auto-mode-alist
+        (append '((".*\\.astro\\'" . js-jsx-mode))
+                auto-mode-alist))
+
+
+  ;; Writeroom
+  ;; ---------------
+  (with-eval-after-load 'writeroom-mode
+    (setq-default writeroom-width 90)
+    (setq-default writeroom--mode-line-showing t)
+    (define-key writeroom-mode-map (kbd "C-M-<") #'writeroom-decrease-width)
+    (define-key writeroom-mode-map (kbd "C-M->") #'writeroom-increase-width)
+    (define-key writeroom-mode-map (kbd "C-M-=") #'writeroom-adjust-width))
+
+  ;; -----------------------
+  ;; Org Mode Configuration
+  ;; -----------------------
+  (setq org-journal-dir "~/Sync/org/journal/")
+  (setq org-journal-file-format "%Y%m%d.org")
+  (setq org-hide-emphasis-markers t)
+
+  (add-hook 'org-mode-hook (lambda ()
+                              "Beautify Org Checkbox Symbol"
+                              (push '("[ ]" . "☐") prettify-symbols-alist)
+                              (push '("[X]" . "☑" ) prettify-symbols-alist)
+                              (push '("[-]" . "❍" ) prettify-symbols-alist)
+                              (prettify-symbols-mode)))
+
+  ;; -----------------------
+  ;; Terminal Emacs Settings
+  ;; -----------------------
   (unless (display-graphic-p)
     ;; activate mouse-based scrolling
     (xterm-mouse-mode 1)
@@ -585,12 +602,127 @@ before packages are loaded."
     (global-set-key (kbd "<mouse-5>") 'scroll-up-line)
     )
 
-  (with-eval-after-load 'writeroom-mode
-    (setq-default writeroom-width 90)
-    (setq-default writeroom--mode-line-showing t)
-    (define-key writeroom-mode-map (kbd "C-M-<") #'writeroom-decrease-width)
-    (define-key writeroom-mode-map (kbd "C-M->") #'writeroom-increase-width)
-    (define-key writeroom-mode-map (kbd "C-M-=") #'writeroom-adjust-width))
+  ;; Does not work with mosh only when connecting over adb or ssh
+  (unless (display-graphic-p)
+    (require 'evil-terminal-cursor-changer)
+    (evil-terminal-cursor-changer-activate)
+    (advice-add 'etcc--make-tmux-seq :override #'identity))
+
+  ;; ----------------------
+  ;; Graphic Emacs Settings
+  ;; ----------------------
+      (require 'svg-tag-mode)
+
+      (defconst date-re "[0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}")
+      (defconst time-re "[0-9]\\{2\\}:[0-9]\\{2\\}")
+      (defconst day-re "[A-Za-z]\\{3\\}")
+      (defconst day-time-re (format "\\(%s\\)? ?\\(%s\\)?" day-re time-re))
+
+      (defun svg-progress-percent (value)
+        (svg-image (svg-lib-concat
+                    (svg-lib-progress-bar (/ (string-to-number value) 100.0)
+                                      nil :margin 0 :stroke 2 :radius 3 :padding 2 :width 11)
+                    (svg-lib-tag (concat value "%")
+                                nil :stroke 0 :margin 0)) :ascent 'center))
+
+      (defun svg-progress-count (value)
+        (let* ((seq (mapcar #'string-to-number (split-string value "/")))
+              (count (float (car seq)))
+              (total (float (cadr seq))))
+        (svg-image (svg-lib-concat
+                    (svg-lib-progress-bar (/ count total) nil
+                                          :margin 0 :stroke 2 :radius 3 :padding 2 :width 11)
+                    (svg-lib-tag value nil
+                                :stroke 0 :margin 0)) :ascent 'center)))
+
+      (setq svg-tag-tags
+            `(
+              ;; -------------------------------------------------------------
+              ;; Org tags
+              ;; -------------------------------------------------------------
+              (":\\([A-Za-z0-9]+\\)" . ((lambda (tag) (svg-tag-make tag))))
+              (":\\([A-Za-z0-9]+[ \-]\\)" . ((lambda (tag) tag)))
+
+              ;; -------------------------------------------------------------
+              ;; Task priority
+              ;; -------------------------------------------------------------
+              ("\\[#[A-Z]\\]" . ( (lambda (tag)
+                                    (svg-tag-make tag :face 'org-priority 
+                                                  :beg 2 :end -1 :margin 0))))
+
+              ;; -------------------------------------------------------------
+              ;; Progress
+              ;; -------------------------------------------------------------
+              ("\\(\\[[0-9]\\{1,3\\}%\\]\\)" . ((lambda (tag)
+                                                  (svg-progress-percent (substring tag 1 -2)))))
+              ("\\(\\[[0-9]+/[0-9]+\\]\\)" . ((lambda (tag)
+                                                (svg-progress-count (substring tag 1 -1)))))
+
+              ;; -------------------------------------------------------------
+              ;; TODO / DONE
+              ;; -------------------------------------------------------------
+              ("TODO" . ((lambda (tag) (svg-tag-make "TODO" :face 'org-todo :inverse t :margin 0))))
+              ("DONE" . ((lambda (tag) (svg-tag-make "DONE" :face 'org-done :margin 0))))
+
+              ;; -------------------------------------------------------------
+              ;; Citation of the form [cite:@Knuth:1984]
+              ;; -------------------------------------------------------------
+              ("\\(\\[cite:@[A-Za-z]+:\\)" . ((lambda (tag)
+                                                (svg-tag-make tag
+                                                              :inverse t
+                                                              :beg 7 :end -1
+                                                              :crop-right t))))
+              ("\\[cite:@[A-Za-z]+:\\([0-9]+\\]\\)" . ((lambda (tag)
+                                                      (svg-tag-make tag
+                                                                    :end -1
+                                                                    :crop-left t))))
+
+              ;; -------------------------------------------------------------
+              ;; Active date (with or without day name, with or without time)
+              ;; -------------------------------------------------------------
+              (,(format "\\(<%s>\\)" date-re) .
+              ((lambda (tag)
+                  (svg-tag-make tag :beg 1 :end -1 :margin 0))))
+              (,(format "\\(<%s \\)%s>" date-re day-time-re) .
+              ((lambda (tag)
+                  (svg-tag-make tag :beg 1 :inverse nil :crop-right t :margin 0))))
+              (,(format "<%s \\(%s>\\)" date-re day-time-re) .
+              ((lambda (tag)
+                  (svg-tag-make tag :end -1 :inverse t :crop-left t :margin 0))))
+
+              ;; -------------------------------------------------------------
+              ;; Inactive date  (with or without day name, with or without time)
+              ;; -------------------------------------------------------------
+              (,(format "\\(\\[%s\\]\\)" date-re) .
+                ((lambda (tag)
+                  (svg-tag-make tag :beg 1 :end -1 :margin 0 :face 'org-date))))
+              (,(format "\\(\\[%s \\)%s\\]" date-re day-time-re) .
+                ((lambda (tag)
+                  (svg-tag-make tag :beg 1 :inverse nil :crop-right t :margin 0 :face 'org-date))))
+              (,(format "\\[%s \\(%s\\]\\)" date-re day-time-re) .
+                ((lambda (tag)
+                  (svg-tag-make tag :end -1 :inverse t :crop-left t :margin 0 :face 'org-date))))))
+
+      (svg-tag-mode t)
+      (add-hook 'org-mode-hook 'svg-tag-mode)
+      (add-hook 'org-mode-hook 'variable-pitch-mode)
+      (add-hook 'org-mode-hook 'olivetti-mode)
+      (add-hook 'org-mode-hook 'spacemacs/toggle-fringe-off)
+
+      (custom-theme-set-faces
+       'user
+       '(org-block ((t (:inherit fixed-pitch))))
+       '(org-code ((t (:inherit (shadow fixed-pitch)))))
+       '(org-document-info ((t (:foreground "dark orange"))))
+       '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
+       '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
+       '(org-link ((t (:foreground "royal blue" :underline t))))
+       '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+       '(org-property-value ((t (:inherit fixed-pitch))) t)
+       '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+       '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
+       '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
+       '(org-verbatim ((t (:inherit (shadow fixed-pitch))))))
 
   )
 
@@ -610,11 +742,12 @@ This function is called at the very end of Spacemacs initialization."
  '(evil-want-Y-yank-to-eol nil)
  '(helm-completion-style 'emacs)
  '(package-selected-packages
-   '(dap-mode lsp-docker olivetti bui emojify emoji-cheat-sheet-plus company-emoji yapfify yaml-mode web-mode web-beautify toml-mode tagedit sphinx-doc slim-mode scss-mode sass-mode ron-mode ranger racer pytest pyenv-mode py-isort pug-mode prettier-js poetry pippel pipenv pyvenv pip-requirements npm-mode nodejs-repl lsp-python-ms lsp-pyright livid-mode skewer-mode live-py-mode json-navigator hierarchy js2-refactor multiple-cursors js2-mode js-doc insert-shebang importmagic epc ctable concurrent deferred impatient-mode simple-httpd helm-pydoc helm-css-scss haml-mode flycheck-rust flycheck-bashate fish-mode emmet-mode dockerfile-mode docker tablist json-mode docker-tramp json-snatcher json-reformat cython-mode company-web web-completion-data company-shell company-anaconda cargo rust-mode blacken anaconda-mode pythonic ahk-mode evil-terminal-cursor-changer yasnippet-snippets xterm-color ws-butler writeroom-mode winum which-key vterm volatile-highlights vi-tilde-fringe uuidgen use-package unfill undo-tree treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil toc-org terminal-here symon symbol-overlay string-inflection string-edit spaceline-all-the-icons smeargle shell-pop restart-emacs rainbow-delimiters popwin pcre2el password-generator paradox overseer orgit-forge org-superstar org-rich-yank org-projectile org-present org-pomodoro org-mime org-download org-cliplink org-brain open-junk-file nameless mwim multi-term multi-line mmm-mode markdown-toc magit-svn magit-section magit-gitflow macrostep lsp-ui lsp-treemacs lsp-origami lorem-ipsum link-hint indent-guide hybrid-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org-rifle helm-org helm-mode-manager helm-make helm-lsp helm-ls-git helm-gitignore helm-git-grep helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitignore-templates gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ gh-md fuzzy font-lock+ flyspell-correct-helm flycheck-pos-tip flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emr elisp-slime-nav editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode browse-at-remote auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent ace-link ace-jump-helm-line ac-ispell)))
+   '(svg-tag-mode svg-lib dap-mode lsp-docker olivetti bui emojify emoji-cheat-sheet-plus company-emoji yapfify yaml-mode web-mode web-beautify toml-mode tagedit sphinx-doc slim-mode scss-mode sass-mode ron-mode ranger racer pytest pyenv-mode py-isort pug-mode prettier-js poetry pippel pipenv pyvenv pip-requirements npm-mode nodejs-repl lsp-python-ms lsp-pyright livid-mode skewer-mode live-py-mode json-navigator hierarchy js2-refactor multiple-cursors js2-mode js-doc insert-shebang importmagic epc ctable concurrent deferred impatient-mode simple-httpd helm-pydoc helm-css-scss haml-mode flycheck-rust flycheck-bashate fish-mode emmet-mode dockerfile-mode docker tablist json-mode docker-tramp json-snatcher json-reformat cython-mode company-web web-completion-data company-shell company-anaconda cargo rust-mode blacken anaconda-mode pythonic ahk-mode evil-terminal-cursor-changer yasnippet-snippets xterm-color ws-butler writeroom-mode winum which-key vterm volatile-highlights vi-tilde-fringe uuidgen use-package unfill undo-tree treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil toc-org terminal-here symon symbol-overlay string-inflection string-edit spaceline-all-the-icons smeargle shell-pop restart-emacs rainbow-delimiters popwin pcre2el password-generator paradox overseer orgit-forge org-superstar org-rich-yank org-projectile org-present org-pomodoro org-mime org-download org-cliplink org-brain open-junk-file nameless mwim multi-term multi-line mmm-mode markdown-toc magit-svn magit-section magit-gitflow macrostep lsp-ui lsp-treemacs lsp-origami lorem-ipsum link-hint indent-guide hybrid-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org-rifle helm-org helm-mode-manager helm-make helm-lsp helm-ls-git helm-gitignore helm-git-grep helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitignore-templates gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ gh-md fuzzy font-lock+ flyspell-correct-helm flycheck-pos-tip flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emr elisp-slime-nav editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode browse-at-remote auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent ace-link ace-jump-helm-line ac-ispell)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(fixed-pitch ((t (:family "Inconsolata Nerd Font Mono"))))
+ '(variable-pitch ((t (:family "Berenis ADF Pro")))))
 )
