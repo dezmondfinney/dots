@@ -262,7 +262,7 @@ It should only modify the values of Spacemacs settings."
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
    dotspacemacs-default-font '("Inconsolata Nerd Font Mono"
-                               :size 18.0
+                               :size 16.0
                                :weight normal
                                :width normal)
 
@@ -557,6 +557,7 @@ before packages are loaded."
   (global-set-key [(control h)] 'delete-backward-char)
   (setq-default evil-escape-key-sequence "jj")
   (setq-default evil-escape-delay 0.2)
+  (setq-default line-spacing 0.2)
 
   ;; -------------------
   ;; Mode Configurations
