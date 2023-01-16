@@ -5,6 +5,7 @@ set -gx GOPATH $HOME/go
 set -gx INFOPATH /data/data/com.termux/files/usr/share/info/
 set -gx LOGDATE (date +"%Y%m%dT%H%M%S")
 set fish_greeting
+set --universal nvm_default_version latest
 
 abbr -a -g tx task export
 abbr -a -g ar ranger
