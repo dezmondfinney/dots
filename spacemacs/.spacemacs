@@ -576,6 +576,7 @@ before packages are loaded."
     (define-key writeroom-mode-map (kbd "C-M->") #'writeroom-increase-width)
     (define-key writeroom-mode-map (kbd "C-M-=") #'writeroom-adjust-width))
 
+  (setq olivetti-body-width 0.7)
   ;; -----------------------
   ;; Org Mode Configuration
   ;; -----------------------
