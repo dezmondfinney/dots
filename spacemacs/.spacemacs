@@ -562,7 +562,7 @@ Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
   (global-set-key [(control h)] 'delete-backward-char)
-  (setq-default evil-escape-key-sequence "jk")
+  (setq-default evil-escape-key-sequence "jj")
   (setq-default evil-escape-delay 0.2)
   (setq-default line-spacing 0.2)
 
