@@ -580,7 +580,7 @@ before packages are loaded."
   ;; -----------------------
   ;; Org Mode Configuration
   ;; -----------------------
-  (setq org-journal-dir "~/MyOrg/journal/")
+  (setq org-journal-dir "~/Notebooks/journal/")
   (setq org-journal-file-format "%Y%m%d.org")
   (setq org-hide-emphasis-markers t)
 
