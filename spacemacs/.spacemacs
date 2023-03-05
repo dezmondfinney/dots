@@ -585,9 +585,10 @@ before packages are loaded."
   (setq org-hide-emphasis-markers t)
 
   (add-hook 'org-mode-hook 'variable-pitch-mode)
-  (add-hook 'org-mode-hook 'olivetti-mode)
+  ;; (add-hook 'org-mode-hook 'olivetti-mode)
   (add-hook 'org-mode-hook 'spacemacs/toggle-fringe-off)
   (add-hook 'org-mode-hook 'org-modern-mode)
+  (add-hook 'writeroom-mode-hook 'visual-line-mode)
 
   (add-hook 'auto-save-hook 'org-save-all-org-buffers)
 
