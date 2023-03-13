@@ -560,6 +560,7 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  (setq header-line-format " ")
 
   (global-set-key [(control h)] 'delete-backward-char)
   (setq-default evil-escape-key-sequence "jj")
@@ -585,7 +586,6 @@ before packages are loaded."
   (setq org-hide-emphasis-markers t)
 
   (add-hook 'org-mode-hook 'variable-pitch-mode)
-  ;; (add-hook 'org-mode-hook 'olivetti-mode)
   (add-hook 'org-mode-hook 'spacemacs/toggle-fringe-off)
   (add-hook 'org-mode-hook 'org-modern-mode)
   (add-hook 'writeroom-mode-hook 'visual-line-mode)
@@ -610,6 +610,9 @@ before packages are loaded."
     '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
     '(org-verbatim ((t (:inherit (shadow fixed-pitch))))))
 
+  (setq org-capture-templates
+        '(("t" "Tasks" entry (file+headline "~/Notebooks/notes.org" "Tasks") "* TODO %?n")
+          ("r" "Read Later" entry (file+headline "~/Notebooks/notes.org" "Read Later") "* %a %?n")))
   ;; -----------------------
   ;; Terminal Emacs Settings
   ;; -----------------------
@@ -665,5 +668,6 @@ This function is called at the very end of Spacemacs initialization."
  '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
  '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
  '(org-todo ((t (:inherit fixed-pitch))))
- '(org-verbatim ((t (:inherit (shadow fixed-pitch))))))
+ '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
+ '(variable-pitch ((t (:family "EtBembo")))))
 )
