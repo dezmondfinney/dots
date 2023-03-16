@@ -560,6 +560,10 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  (setq auto-mode-alist
+        (append '((".*\\.astro\\'" . js-jsx-mode))
+                auto-mode-alist))
+
   (setq header-line-format " ")
 
   (global-set-key [(control h)] 'delete-backward-char)
