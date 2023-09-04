@@ -567,7 +567,7 @@ before packages are loaded."
   (setq header-line-format " ")
 
   (global-set-key [(control h)] 'delete-backward-char)
-  (setq-default evil-escape-key-sequence "jj")
+  (setq-default evil-escape-key-sequence "jk")
   (setq-default evil-escape-delay 0.2)
   (setq-default line-spacing 0.2)
 
@@ -594,7 +594,7 @@ before packages are loaded."
   (add-hook 'org-mode-hook 'org-modern-mode)
   (add-hook 'writeroom-mode-hook 'visual-line-mode)
 
-  (add-hook 'auto-save-hook 'org-save-all-org-buffers)
+  ;; (add-hook 'auto-save-hook 'org-save-all-org-buffers)
 
   (custom-theme-set-faces
     'user
