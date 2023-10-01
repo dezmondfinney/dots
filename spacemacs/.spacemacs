@@ -561,7 +561,7 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
   (setq auto-mode-alist
-        (append '((".*\\.astro\\'" . js-jsx-mode))
+        (append '((".*\\.astro\\'" . web-mode))
                 auto-mode-alist))
 
   (setq header-line-format " ")
