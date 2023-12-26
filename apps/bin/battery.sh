@@ -119,4 +119,4 @@ else
 fi
 
 # Output the formatted string for tmux
-echo "#[fg=$color]$icon #[default]"
+echo "#[fg=$color]$icon #[default]$battery_percentage %"
