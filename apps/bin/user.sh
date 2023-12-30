@@ -4,5 +4,5 @@ name=$(id -un)
 if [ $name = "u0_a286" ]; then
 	echo "Tab S7+"
 else
-	echo $name
+	echo $(hostname)
 fi
