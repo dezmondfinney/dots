@@ -585,13 +585,13 @@ before packages are loaded."
   ;; -----------------------
   ;; Org Mode Configuration
   ;; -----------------------
-  (setq org-journal-dir "~/Notebooks/journal/")
-  (setq org-journal-file-format "%Y%m%d.org")
+  (setq org-agenda-files '("~/brain/" "~/brain/journal/"))
+  (setq org-journal-dir "~/brain/journal/")
+  (setq org-journal-file-format "%Y-%m-%d.org")
   (setq org-hide-emphasis-markers t)
 
   (add-hook 'org-mode-hook 'variable-pitch-mode)
   (add-hook 'org-mode-hook 'spacemacs/toggle-fringe-off)
-  (add-hook 'org-mode-hook 'org-modern-mode)
   (add-hook 'writeroom-mode-hook 'visual-line-mode)
 
   ;; (add-hook 'auto-save-hook 'org-save-all-org-buffers)
@@ -615,8 +615,8 @@ before packages are loaded."
     '(org-verbatim ((t (:inherit (shadow fixed-pitch))))))
 
   (setq org-capture-templates
-        '(("t" "Tasks" entry (file+headline "~/Notebooks/notes.org" "Tasks") "* TODO %?n")
-          ("r" "Read Later" entry (file+headline "~/Notebooks/notes.org" "Read Later") "* %a %?n")))
+        '(("t" "Tasks" entry (file+headline "~/brain/notes.org" "Tasks") "* TODO %?n")
+          ("r" "Read Later" entry (file+headline "~/brain/notes.org" "Read Later") "* %a %?n")))
   ;; -----------------------
   ;; Terminal Emacs Settings
   ;; -----------------------
