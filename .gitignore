@@ -1,0 +1,14 @@
+# Aider files
+.aider*
+# macOS
+.DS_Store
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+venv/
+*/venv/
+scripts/zellij-dashboard/venv/
