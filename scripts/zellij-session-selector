@@ -1,0 +1,8 @@
+#!/bin/bash
+
+session_name=$(zellij list-sessions --short | fzf --header "Select a Zellij session")
+
+if [ -n "$session_name" ]; then
+  zellij attach "$session_name"
+fi
+
