@@ -49,6 +49,11 @@
     ln -s ~/dots/zellij ~/.config/zellij
     ln -s ~/dots/scripts/zellij-session-selector ~/bin/zellij-session-selector
     ln -s ~/dots/scripts/zellij-dashboard/dashboard.py ~/bin/zellij-dashboard
+ 4. Create and populate the private fish config:
+    ```sh
+    cp fish/.config/fish/config_private.fish.example ~/.config/fish/config_private.fish
+    # Edit ~/.config/fish/config_private.fish to add your API keys
+    ```
     ```
 
  ## Usage
@@ -86,4 +91,4 @@
 
  ## Security
 
- No sensitive credentials or private keys are included in this repository.
+No sensitive credentials or private keys are included in this repository. Your personal API keys should be placed in `~/.config/fish/config_private.fish`, which is ignored by Git.

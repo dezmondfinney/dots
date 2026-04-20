@@ -1,0 +1,10 @@
+# Private Fish config (config_private.fish)
+#
+# This file is for your personal API keys and other sensitive variables.
+# It is ignored by git and will be loaded automatically by config.fish.
+#
+# Uncomment and set your API keys below:
+# set -Ux OPENAI_API_KEY <your-openai-api-key>
+# set -Ux OPENROUTER_API_KEY <your-openrouter-api-key>
+# set -Ux OLLAMA_API_KEY <your-ollama-api-key>
+# set -Ux OPENCLAW_ALLOW_INSECURE_PRIVATE_WS 1

@@ -1,5 +1,9 @@
 set -Ux PYENV_ROOT $HOME/.pyenv
-# Set environment variable
+# Load private environment variables (e.g., API keys).
+# Create ~/.config/fish/config_private.fish and add your keys there.
+if test -f ~/.config/fish/config_private.fish
+    source ~/.config/fish/config_private.fish
+end
 set -Ux OPENCLAW_ALLOW_INSECURE_PRIVATE_WS 1
 
 set -Ux GHOSTTY_CONFIG ~/.config/ghostty/config
