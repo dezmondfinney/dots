@@ -11,6 +11,8 @@ __pycache__/
 # Virtual environments
 venv/
 */venv/
-scripts/zellij-dashboard/venv/
+scripts/zellij-dashboard/venv
+# Local archive of retired dotfile trees
+archive/
 # Private Fish config
 fish/.config/fish/config_private.fish

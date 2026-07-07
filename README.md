@@ -5,6 +5,9 @@
 
  - `git/`
    - `.gitconfig` : Global Git configuration
+ - `ranger/`
+   - `.config/ranger/rc.conf` : Ranger configuration with devicons/icon setup
+   - `.config/ranger/plugins/` : Ranger plugins
  - `nvim/`
    - `.config/nvim/` : Neovim configuration, plugin specs, and lock files
  - `ghostty/`
@@ -51,7 +54,7 @@
 
  2. (Optional) Use GNU Stow to symlink configurations:
     ```sh
-    stow git nvim ghostty btop htop taskwarrior fish tmux zellij local
+    stow git ranger nvim ghostty btop htop taskwarrior fish tmux zellij local
     ```
 
  3. (Manual symlink) Alternatively:
