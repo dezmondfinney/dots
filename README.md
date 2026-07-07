@@ -3,8 +3,18 @@
 
  ## Contents
 
- - `.config/`
-   - `ranger/` : Ranger file manager configuration (`rc.conf`, `devicons` plugin)
+ - `git/`
+   - `.gitconfig` : Global Git configuration
+ - `nvim/`
+   - `.config/nvim/` : Neovim configuration, plugin specs, and lock files
+ - `ghostty/`
+   - `.config/ghostty/config` : Ghostty terminal configuration
+ - `btop/`
+   - `.config/btop/btop.conf` : btop process monitor configuration
+ - `htop/`
+   - `.config/htop/htoprc` : htop process monitor configuration
+ - `taskwarrior/`
+   - `.taskrc` : Taskwarrior configuration
  - `fish/`
    - `.config/fish/config.fish` : Fish shell configuration
  - `tmux/`
@@ -41,29 +51,55 @@
 
  2. (Optional) Use GNU Stow to symlink configurations:
     ```sh
-    stow .config fish tmux zellij local
+    stow git nvim ghostty btop htop taskwarrior fish tmux zellij local
     ```
 
  3. (Manual symlink) Alternatively:
     ```sh
-    ln -s ~/dots/.config/ranger ~/.config/ranger
+    ln -s ~/dots/git/.gitconfig ~/.gitconfig
+    ln -s ~/dots/nvim/.config/nvim ~/.config/nvim
+    ln -s ~/dots/ghostty/.config/ghostty ~/.config/ghostty
+    ln -s ~/dots/btop/.config/btop ~/.config/btop
+    ln -s ~/dots/htop/.config/htop ~/.config/htop
+    ln -s ~/dots/taskwarrior/.taskrc ~/.taskrc
+    ln -s ~/dots/ranger/.config/ranger ~/.config/ranger
     ln -s ~/dots/fish/.config/fish/config.fish ~/.config/fish/config.fish
     ln -s ~/dots/tmux/.tmux.conf ~/.tmux.conf
     ln -s ~/dots/zellij/.config/zellij ~/.config/zellij
     ln -s ~/dots/local/.local/bin/zellij-session-selector ~/.local/bin/zellij-session-selector
     ln -s ~/dots/local/.local/bin/zellij-dashboard ~/.local/bin/zellij-dashboard
+    ```
  4. Create and populate the private fish config:
     ```sh
     cp fish/.config/fish/config_private.fish.example ~/.config/fish/config_private.fish
     # Edit ~/.config/fish/config_private.fish to add your API keys
     ```
-    ```
-
- ## Usage
+## Usage
 
  - Start Fish shell:
    ```sh
    fish
+   ```
+
+ - Open Neovim:
+   ```sh
+   nvim
+   ```
+
+ - Open Ghostty:
+   ```sh
+   ghostty
+   ```
+
+ - Run btop or htop:
+   ```sh
+   btop
+   htop
+   ```
+
+ - Use Taskwarrior:
+   ```sh
+   task
    ```
 
  - Run Ranger:
