@@ -10,8 +10,9 @@
  - `tmux/`
    - `.tmux.conf` : Tmux configuration
  - `zellij/`
-   - `layouts/default.kdl` : Default Zellij layout
-   - `plugins/` : WebAssembly plugins for Zellij (`zjframes.wasm`, `zjstatus.wasm`)
+   - `.config/zellij/config.kdl` : Zellij config
+   - `.config/zellij/layouts/default.kdl` : Default Zellij layout
+   - `.config/zellij/plugins/` : WebAssembly plugins for Zellij (`zjframes.wasm`, `zjstatus.wasm`)
  - `scripts/`
    - `zellij-dashboard/` : Python dashboard for Zellij (includes `venv/`)
    - `zellij-session-selector` : Script to select and attach to Zellij sessions
@@ -46,7 +47,7 @@
     ln -s ~/dots/.config/ranger ~/.config/ranger
     ln -s ~/dots/fish/.config/fish/config.fish ~/.config/fish/config.fish
     ln -s ~/dots/tmux/.tmux.conf ~/.tmux.conf
-    ln -s ~/dots/zellij ~/.config/zellij
+    ln -s ~/dots/zellij/.config/zellij ~/.config/zellij
     ln -s ~/dots/scripts/zellij-session-selector ~/bin/zellij-session-selector
     ln -s ~/dots/scripts/zellij-dashboard/dashboard.py ~/bin/zellij-dashboard
  4. Create and populate the private fish config:
