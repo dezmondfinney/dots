@@ -7,6 +7,8 @@ end
 set -Ux OPENCLAW_ALLOW_INSECURE_PRIVATE_WS 1
 
 set -Ux GHOSTTY_CONFIG ~/.config/ghostty/config
+set -Ux MANPAGER 'nvim +Man!'
+
 
 if test "$TERM" = xterm-ghostty
     set -gx TERM xterm-256color
@@ -47,3 +49,6 @@ end
 
 # OpenClaw Completion
 # source "/Users/dezmondfinney/.openclaw/completions/openclaw.fish"
+
+# Hermes Agent — ensure ~/.local/bin is on PATH
+fish_add_path "$HOME/.local/bin"
