@@ -13,9 +13,11 @@
    - `.config/zellij/config.kdl` : Zellij config
    - `.config/zellij/layouts/default.kdl` : Default Zellij layout
    - `.config/zellij/plugins/` : WebAssembly plugins for Zellij (`zjframes.wasm`, `zjstatus.wasm`)
+ - `local/`
+   - `.local/bin/zellij-dashboard` : Launcher for the Zellij dashboard
+   - `.local/bin/zellij-session-selector` : Script to select and attach to Zellij sessions
  - `scripts/`
-   - `zellij-dashboard/` : Python dashboard for Zellij (includes `venv/`)
-   - `zellij-session-selector` : Script to select and attach to Zellij sessions
+   - `zellij-dashboard/dashboard.py` : Python dashboard implementation (includes `venv/`)
  - `gemini.md` : Gemini protocol version of this README
  - `.gitignore` : Files and directories ignored by Git
 
@@ -39,7 +41,7 @@
 
  2. (Optional) Use GNU Stow to symlink configurations:
     ```sh
-    stow .config fish tmux zellij scripts
+    stow .config fish tmux zellij local
     ```
 
  3. (Manual symlink) Alternatively:
@@ -48,8 +50,8 @@
     ln -s ~/dots/fish/.config/fish/config.fish ~/.config/fish/config.fish
     ln -s ~/dots/tmux/.tmux.conf ~/.tmux.conf
     ln -s ~/dots/zellij/.config/zellij ~/.config/zellij
-    ln -s ~/dots/scripts/zellij-session-selector ~/bin/zellij-session-selector
-    ln -s ~/dots/scripts/zellij-dashboard/dashboard.py ~/bin/zellij-dashboard
+    ln -s ~/dots/local/.local/bin/zellij-session-selector ~/.local/bin/zellij-session-selector
+    ln -s ~/dots/local/.local/bin/zellij-dashboard ~/.local/bin/zellij-dashboard
  4. Create and populate the private fish config:
     ```sh
     cp fish/.config/fish/config_private.fish.example ~/.config/fish/config_private.fish
@@ -81,13 +83,12 @@
 
  - Run the Zellij dashboard:
    ```sh
-   source scripts/zellij-dashboard/venv/bin/activate
-   python scripts/zellij-dashboard/dashboard.py
+   zellij-dashboard
    ```
 
  - Use the Zellij session selector:
    ```sh
-   scripts/zellij-session-selector
+   zellij-session-selector
    ```
 
  ## Security

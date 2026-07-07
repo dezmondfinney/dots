@@ -1,0 +1,12 @@
+#!/bin/bash
+set -euo pipefail
+
+repo_root="$HOME/dots"
+launcher="$repo_root/scripts/zellij-dashboard/dashboard.py"
+venv_python="$repo_root/scripts/zellij-dashboard/venv/bin/python"
+
+if [ -x "$venv_python" ]; then
+  exec "$venv_python" "$launcher" "$@"
+fi
+
+exec python3 "$launcher" "$@"
