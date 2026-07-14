@@ -19,8 +19,11 @@
  - `taskwarrior/`
    - `.taskrc` : Taskwarrior configuration
  - `fish/`
-   - `.config/fish/config.fish` : Fish shell configuration
- - `tmux/`
+  - `.config/fish/config.fish` : Fish shell configuration
+  - `.config/fish/conf.d/prompt.fish` : Prompt defaults and git prompt colors
+  - `.config/fish/functions/fish_prompt.fish` : Left prompt
+  - `.config/fish/functions/fish_right_prompt.fish` : Right prompt
+- `tmux/`
    - `.tmux.conf` : Tmux configuration
  - `zellij/`
    - `.config/zellij/config.kdl` : Zellij config

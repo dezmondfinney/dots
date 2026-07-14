@@ -37,16 +37,6 @@ end
 set -Ux EDITOR nvim
 set -Ux VISUAL nvim
 
-function fish_prompt
-    # Get width of terminal
-    set -l width (tput cols)
-
-    # Create a line of "─" characters across
-    printf "%*s\n" $width '' | tr ' ' '─'
-    # Show current directory and prompt
-    echo -n (prompt_pwd) ' ❯ '
-end
-
 # OpenClaw Completion
 # source "/Users/dezmondfinney/.openclaw/completions/openclaw.fish"
 
